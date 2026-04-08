@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import { ShoppingCart, LogOut, User } from 'lucide-react';
+import logo from '../assets/logo.svg';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -20,8 +21,9 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container nav-content">
         <Link to="/" className="nav-brand">
-          <div style={{ fontFamily: 'serif', fontSize: '1.8rem', color: 'white' }}>
-            ServeEase.
+          <img src={logo} alt="ServeEase logo" className="nav-logo" />
+          <div>
+            <span>ServeEase</span>
           </div>
         </Link>
         <div className="nav-links">

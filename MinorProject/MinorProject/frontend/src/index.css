@@ -1,14 +1,15 @@
+/* Core Variables for Warm, Foody Aesthetic */
 :root {
-  --primary: #8A1538;        /* Maroon red */
-  --primary-light: #A31D45;
-  --secondary: #F4A216;      /* Golden yellow */
-  --accent: #F4A216;         /* Golden yellow */
-  --bg-color: #FAFAFA;       /* Very light gray/off-white */
-  --text-dark: #222222;
+  --primary: #f06543;        /* Soft vibrant orange */
+  --primary-light: #ff7e5f;
+  --secondary: #e8dbce;      /* Cream/Light brown */
+  --accent: #d90429;         /* Subtle red accent */
+  --bg-color: #fdfaf6;       /* Extremely soft cream background */
+  --text-dark: #2b2b2b;
   --text-light: #ffffff;
   --card-bg: #ffffff;
-  --glass-bg: rgba(25, 25, 25, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.4);
   --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -76,14 +77,14 @@ h1, h2, h3, h4, h5 {
 }
 
 .btn-primary {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: var(--text-light);
-  box-shadow: 0 4px 15px rgba(138, 21, 56, 0.3);
+  box-shadow: 0 4px 15px rgba(240, 101, 67, 0.4);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(138, 21, 56, 0.5);
+  box-shadow: 0 6px 20px rgba(240, 101, 67, 0.6);
 }
 
 .btn-secondary {
@@ -132,7 +133,7 @@ h1, h2, h3, h4, h5 {
 
 .nav-link {
   text-decoration: none;
-  color: #fff;
+  color: var(--text-dark);
   font-weight: 500;
   transition: var(--transition);
   background: transparent;
@@ -141,7 +142,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .nav-link:hover {
-  color: var(--secondary);
+  color: var(--primary-dark);
 }
 
 .nav-brand img.nav-logo {
