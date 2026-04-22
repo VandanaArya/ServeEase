@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { API_BASE_URL } from '../config';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +31,7 @@ const Cart = () => {
     };
 
     try {
-        const res = await fetch('http://localhost:5000/api/orders', {
+        const res = await fetch(`${API_BASE_URL}/api/orders`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)

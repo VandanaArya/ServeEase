@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { API_BASE_URL } from '../config';
 import { CartContext } from '../context/CartContext';
 
 const Menu = () => {
@@ -9,7 +10,7 @@ const Menu = () => {
 
   useEffect(() => {
     // Fetch menu from backend
-    fetch('http://localhost:5000/api/menu')
+    fetch(`${API_BASE_URL}/api/menu`)
       .then(res => res.json())
       .then(data => {
         setMenuItems(data);
@@ -46,7 +47,7 @@ const Menu = () => {
       {menuItems.length === 0 ? (
         <div style={{textAlign: 'center', padding: '3rem', background: 'var(--card-bg)', borderRadius: '20px'}}>
              <h4>No menu items found.</h4>
-             <p>Did you run the seed route on the backend? (POST http://localhost:5000/api/menu/seed)</p>
+             <p>Did you run the seed route on the backend? (POST {API_BASE_URL}/api/menu/seed)</p>
         </div>
       ) : (
         <div className="menu-grid">

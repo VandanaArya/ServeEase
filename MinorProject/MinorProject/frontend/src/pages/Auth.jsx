@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { API_BASE_URL } from '../config';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ const Auth = () => {
     
     // Simulating API call to our backend (Assuming it's running on port 5000)
     try {
-      const url = isLogin ? 'http://localhost:5000/api/auth/login' : 'http://localhost:5000/api/auth/register';
+      const url = isLogin ? `${API_BASE_URL}/api/auth/login` : `${API_BASE_URL}/api/auth/register`;
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

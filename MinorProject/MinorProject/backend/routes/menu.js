@@ -33,4 +33,26 @@ router.post('/seed', async (req, res) => {
   }
 });
 
+// Add a new menu item
+router.post('/', async (req, res) => {
+  try {
+    const newItem = new MenuItem(req.body);
+    await newItem.save();
+    res.status(201).json(newItem);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Delete a menu item
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletedItem = await MenuItem.findByIdAndDelete(req.params.id);
+    if (!deletedItem) return res.status(404).json({ message: 'Item not found' });
+    res.json({ message: 'Item deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

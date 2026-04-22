@@ -8,7 +8,7 @@ import Cart from './pages/Cart';
 import CustomerProfile from './pages/CustomerProfile';
 import ChefDashboard from './pages/ChefDashboard';
 import AdminDashboard from './pages/AdminDashboard';
-
+import TableBooking from './pages/TableBooking';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 
@@ -27,6 +27,7 @@ function App() {
               <Route path="/profile" element={<CustomerProfile />} />
               <Route path="/chef" element={<ChefDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/book-table" element={<TableBooking />} />
             </Routes>
           </div>
         </Router>

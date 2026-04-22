@@ -28,6 +28,13 @@ const orderRoutes = require('./routes/orders');
 const tableRoutes = require('./routes/tables');
 const statRoutes = require('./routes/stats');
 const bookingRoutes = require('./routes/bookings');
+const activityRoutes = require('./routes/activity');
+
+// Attach socket io to requests so it can be used in controllers
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
@@ -35,6 +42,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/tables', tableRoutes);
 app.use('/api/stats', statRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/activity', activityRoutes);
 
 // Socket.io for Real-Time Order status
 io.on('connection', (socket) => {
@@ -47,12 +55,6 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('Client disconnected');
   });
-});
-
-// Attach socket io to requests so it can be used in controllers
-app.use((req, res, next) => {
-  req.io = io;
-  next();
 });
 
 // Database connection

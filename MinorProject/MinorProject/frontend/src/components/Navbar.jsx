@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import { ShoppingCart, LogOut, User } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 import logo from '../assets/logo.svg';
 
 const Navbar = () => {
@@ -10,7 +11,18 @@ const Navbar = () => {
   const { cart } = useContext(CartContext);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    if (user) {
+      try {
+        await fetch(`${API_BASE_URL}/api/auth/logout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: user.id || user._id, name: user.name, role: user.role })
+        });
+      } catch (err) {
+        console.error('Logout tracking failed', err);
+      }
+    }
     logout();
     navigate('/');
   };
@@ -28,9 +40,10 @@ const Navbar = () => {
         </Link>
         <div className="nav-links">
           <Link to="/" className="nav-link">Home</Link>
-          <a href="#about" className="nav-link">About Us</a>
+          <a href="/#about" className="nav-link">About Us</a>
           <Link to="/menu" className="nav-link">Menu</Link>
-          <a href="#contact" className="nav-link">Contact</a>
+          <Link to="/book-table" className="nav-link">Book Table</Link>
+          <a href="/#contact" className="nav-link">Contact</a>
           {user && user.role === 'customer' && (
              <Link to="/profile" className="nav-link">Profile</Link>
           )}

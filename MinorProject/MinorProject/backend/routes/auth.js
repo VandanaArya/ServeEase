@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const ActivityLog = require('../models/ActivityLog');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecretfoodykey123';
 
@@ -37,11 +38,37 @@ router.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
+    // Log the login activity
+    await ActivityLog.create({
+        userId: user._id,
+        name: user.name,
+        role: user.role,
+        action: 'login'
+    });
+
     const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '1d' });
     res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role, loyaltyPoints: user.loyaltyPoints } });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
+});
+
+// Logout (for tracking)
+router.post('/logout', async (req, res) => {
+    try {
+        const { userId, name, role } = req.body;
+        if(userId && name && role) {
+            await ActivityLog.create({
+                userId,
+                name,
+                role,
+                action: 'logout'
+            });
+        }
+        res.json({ message: 'Logged out tracking successful' });
+    } catch(err) {
+        res.status(500).json({ message: 'Server error on logout tracking', err });
+    }
 });
 
 module.exports = router;

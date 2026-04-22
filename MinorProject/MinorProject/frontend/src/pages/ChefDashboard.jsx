@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { API_BASE_URL, SOCKET_URL } from '../config';
 import { io } from 'socket.io-client';
 import { AuthContext } from '../context/AuthContext';
 
@@ -8,7 +9,7 @@ const ChefDashboard = () => {
 
     useEffect(() => {
         // Fetch initial active orders
-        fetch('http://localhost:5000/api/orders')
+        fetch(`${API_BASE_URL}/api/orders`)
             .then(res => res.json())
             .then(data => {
                 // Filter for orders not delivered
@@ -16,7 +17,7 @@ const ChefDashboard = () => {
             });
 
         // Setup Socket
-        const socket = io('http://localhost:5000');
+        const socket = io(SOCKET_URL);
         socket.on('newOrder', (newOrder) => {
             setOrders(prev => [newOrder, ...prev]);
             // Optional: play a sound here!
@@ -33,7 +34,7 @@ const ChefDashboard = () => {
     }, []);
 
     const updateStatus = async (id, status) => {
-        await fetch(`http://localhost:5000/api/orders/${id}/status`, {
+        await fetch(`${API_BASE_URL}/api/orders/${id}/status`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status })

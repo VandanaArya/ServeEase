@@ -13,7 +13,7 @@ const Home = () => {
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
           <Link to="/menu" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}>View Menu</Link>
-          <Link to="/auth" className="btn btn-secondary" style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}>Book a Table</Link>
+          <Link to="/book-table" className="btn btn-secondary" style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}>Book a Table</Link>
         </div>
       </section>
 
@@ -31,7 +31,7 @@ const Home = () => {
           </div>
 
           <div className="card" style={{ textAlign: 'center', padding: '2rem' }}>
-            <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem auto', background: 'rgba(240, 101, 67, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
+            <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem auto', background: 'rgba(153, 19, 19, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
               <ChefHat size={40} />
             </div>
             <h3>2. Order Seamlessly</h3>

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { API_BASE_URL, SOCKET_URL } from '../config';
 import { AuthContext } from '../context/AuthContext';
 import { io } from 'socket.io-client';
 
@@ -10,11 +11,11 @@ const CustomerProfile = () => {
     useEffect(() => {
         if(!user) return;
 
-        fetch(`http://localhost:5000/api/orders/my-orders/${user.id}`)
+        fetch(`${API_BASE_URL}/api/orders/my-orders/${user.id}`)
             .then(res => res.json())
             .then(data => setOrders(data));
 
-        const socket = io('http://localhost:5000');
+        const socket = io(SOCKET_URL);
         socket.on('orderStatusUpdated', (updatedOrder) => {
             setOrders(prev => prev.map(o => o._id === updatedOrder._id ? updatedOrder : o));
         });

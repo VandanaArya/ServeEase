@@ -24,8 +24,13 @@ router.post('/', async (req, res) => {
 
     const savedBooking = await newBooking.save();
     
-    // Update real time to admin
+    // Mark table as occupied
+    table.status = 'occupied';
+    await table.save();
+    
+    // Update real time to admin and customers
     req.io.emit('newBooking', savedBooking);
+    req.io.emit('tableStatusUpdated', table);
 
     res.status(201).json(savedBooking);
   } catch (err) {
